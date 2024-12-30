@@ -33,7 +33,7 @@ public class SpiralMatrix {
     public ArrayList<Integer> spiralOrder(int[][] matrix) {
         ArrayList<Integer> output = new ArrayList<>();
         int x = 0, y = 0, total = matrix.length*matrix[0].length;
-
+        int count = 0;
         int right = matrix[0].length-1, left = matrix[0].length-1, down=matrix.length-1, up=matrix.length-1;
         if(matrix.length<=1 ){
             left=0;
@@ -47,7 +47,9 @@ public class SpiralMatrix {
                 y++;
             }
             right--;
-            if(output.size()>=total){break;}
+            if(count>=1){
+                right--;
+            }
             for(int i = 0; i < down; i++){
                 if(output.size()>=total){break;}
                 output.add(matrix[x][y]);
@@ -55,14 +57,13 @@ public class SpiralMatrix {
             }
             down--;
             down--;
-            if(output.size()>=total){break;}
             for(int i = 1; i <= left; i++){
+                if(output.size()>=total){break;}
                 output.add(matrix[x][y]);
                 y--;
             }
             left--;
             left--;
-            if(output.size()>=total){break;}
             for(int i = 1; i < up; i++){
                 if(output.size()>=total){break;}
                 output.add(matrix[x][y]);
@@ -74,6 +75,8 @@ public class SpiralMatrix {
             if(right<=0 && left <=0 && up <= 0 && down <=0){
                 output.add(matrix[x][y]);
             }
+            count++;
+
         }
         return output;
     }
